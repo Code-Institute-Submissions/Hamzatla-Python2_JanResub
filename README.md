@@ -38,4 +38,4 @@ Lose Condition: The player loses if bombs run out before destroying all the ship
 
 How to Run
     From the command-line, run the project as:
-    >> python regame.py
+    >> python run.py
