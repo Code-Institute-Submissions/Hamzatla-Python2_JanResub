@@ -8,11 +8,11 @@ import random
 
 
     Mechanics:
-    1. A NxN grid has several linear ships (ship cannot be placed diagonally) scattered in hidden locations
+    1. A NxN grid has several scattered in hidden locations
     2. The player has T number of bullets to take them down
     3. The player can choose a coordinate to fire a bullet
     4. Every shot shows up as either hit or miss
-    5. The player must discover and destroy all the ships before bullets run out, in order to win
+    5. discover and destroy the ships before bullets run out, in order to win
 
     Symbols used:
     - Water: ~
@@ -32,16 +32,16 @@ ship_max_size = 5
 grid = [[]]
 ships = [[]]
 
-#For debugging
+For debugging
 show_ships = True
 
-#Types of tiles
+Types of tiles
 WATER = '~'
 BOMBED_SHIP = 'X'
 BOMBED_WATER = '#'
 SHIP = 'O'
 
-#Directions of ship placement (a primitive enum)
+Directions of ship placement(a primitive enum)
 UP = 1
 DOWN = 2
 LEFT = 3
@@ -52,8 +52,8 @@ AXES = [UP, DOWN, LEFT, RIGHT]
 num_ships_remaining = num_enemy_ships
 num_bullets_remaining = num_bullets
 
-""" 
-Function creates ships according to the specified starting row and column, length and direction,
+"""
+creates ships according to starting row and column, length and direction,
 validates its placement in the grid,
 and places it in the grid
 """
@@ -62,7 +62,7 @@ def create_ship(row, col, direction, length):
     global grid, ships
     global grid_size
 
-    #Check if potential ship fits inside the grid
+    Check if potential ship fits inside the grid
     if direction == UP:
         if (row - length) < 0:
             return False
@@ -76,17 +76,17 @@ def create_ship(row, col, direction, length):
         if (col + length) >= grid_size:
             return False
 
-    #Ship fits the grid
-    #Now check if ship placement is blocked by any object, if not, place the ship
+    Ship fits the grid
+ Now check if ship placement is blocked by any object, if not, place the ship
 
     if direction == UP:
         
-        #Ship can be placed only in water
+        Ship can be placed only in water
         for i in range(length):
             if not (grid[row - i][col] == WATER):
                 return False
 
-        #Place ship
+        Place ship
         for i in range(length):
             grid[row - i][col] = SHIP
 
@@ -94,12 +94,12 @@ def create_ship(row, col, direction, length):
 
     elif direction == DOWN:
 
-        #Ship can be placed only in water
+        ship can be placed only in water
         for i in range(length):
             if not (grid[row + i][col] == WATER):
                 return False
         
-        #Place ship
+        Place ship
         for i in range(length):
             grid[row + i][col] = SHIP
 
@@ -107,12 +107,12 @@ def create_ship(row, col, direction, length):
 
     elif direction == LEFT:
 
-        #Ship can be placed only in water
+        Ship can be placed only in water
         for j in range(length):
             if not (grid[row][col - j] == WATER):
                 return False
 
-        #Place ship
+        Place ship
         for j in range(length):
             grid[row][col - j] = SHIP
 
@@ -120,18 +120,18 @@ def create_ship(row, col, direction, length):
 
     elif direction == RIGHT:
 
-        #Ship can be placed only in water
+        Ship can be placed only in water
         for j in range(length):
             if not (grid[row][col + j] == WATER):
                 return False
 
-        #Place ship
+        Place ship
         for j in range(length):
             grid[row][col + j] = SHIP
 
         ships.append([row, col, row, col + length - 1])
 
-    #Ship placed successfully
+    Ship placed successfully
     return True
 
 """ 
@@ -345,10 +345,10 @@ def main():
 
     make_grid()
 
-    #for s in ships:
+    for s in ships:
     #    print(s)
 
-    while(not is_game_over):
+    #while(not is_game_over):
         print_grid()
         print("\n[" + str(num_ships_remaining) + " enemy ships remaining]")
         print("\n[" + str(num_bullets_remaining) + " bullets remaining]\n")
